@@ -16,8 +16,9 @@ const page = async () => {
           {
             id: 'How to Satisfy a Woman in Bed – Course',
             label: 'How to Satisfy a Woman in Bed – Course',
-            price: 1250,
-            bdPrice: '1250',
+            price: 999,
+            bdPrice: '999',
+            discount: 5000,
             // bdPrice: '২৪৯',
             // description: 'Basic description২',
           },

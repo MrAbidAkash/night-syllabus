@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 
 export default function SectionThree({ page }: { page: any }) {
-  const bdPrice = page?.pricing?.[0]?.bdPrice
+  const price = page?.pricing?.[0]
   // console.log(bdPrice)
   const handleBuyNow = () => {
     const el = document.getElementById('checkout')
@@ -21,7 +21,7 @@ export default function SectionThree({ page }: { page: any }) {
     },
     {
       icon: '❤',
-      text: 'যিনি জানেন কীভাবে পেনিট্রেশন ছাড়াই মাত্র ২০ সেকেন্ডে অর্গাজম করতে হয়!',
+      text: 'দ্রুত অর্গাজম এর টেকনিক',
     },
     {
       icon: '🛡',
@@ -29,7 +29,7 @@ export default function SectionThree({ page }: { page: any }) {
     },
     {
       icon: '💎',
-      text: 'যিনি সম্পর্কের একঘেয়েমি কাটিয়ে প্রতিদিন রোমাঞ্চকর নতুনত্ব যোগ করতে সক্ষম!',
+      text: 'যিনি সম্পর্কের একঘেয়েমি কাটিয়ে রোমাঞ্চকর নতুনত্ব যোগ করতে সক্ষম!',
     },
     {
       icon: '⚡',
@@ -66,9 +66,10 @@ export default function SectionThree({ page }: { page: any }) {
 
         {/* Pricing */}
         <h3 className="text-xl md:text-2xl font-semibold text-center">
-          কোর্সের রেগুলার ফি <span className="text-red-600 line-through">৯,৬৬০ টাকা</span>;
+          কোর্সের রেগুলার ফি{' '}
+          <span className="text-red-600 line-through">{price?.discount} টাকা</span>;
           <br className="md:hidden" /> আজকের জন্য মাত্র{' '}
-          <span className="text-red-600 font-bold">১২৫০ টাকা!</span>
+          <span className="text-red-600 font-bold">{price?.price} টাকা!</span>
         </h3>
 
         {/* CTA */}

@@ -33,14 +33,14 @@ export default function Header() {
           data-widget_type="theme-site-logo.default"
         >
           <div onClick={handleBuyNow} style={{ cursor: 'pointer' }}>
+            {/* Healthy Intimate Life */}
             <div
               role="img"
               aria-label="Site Logo"
-              className="md:w-[128px] md:h-[47px] w-[180px] h-[70px]"
+              className="md:w-[230px] md:h-[72px] w-[180px] h-[70px]"
               style={{
-                backgroundImage:
-                  'url(https://nightsyllabus.com/wp-content/uploads/2026/01/Site-Logo.png)',
-                backgroundSize: 'contain',
+                backgroundImage: 'url(/night.jpeg)',
+                backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
               }}

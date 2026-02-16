@@ -22,7 +22,7 @@ const LandingPage = ({ page }: { page: any }) => {
         </div>
       </div>
       <div className=" bg-white border-b border-gray-200">
-        <div className="max-w-7xl px-10 w-full flex flex-col justify-center items-center mx-auto">
+        <div className="max-w-7xl md:px-10 w-full flex flex-col justify-center items-center mx-auto">
           <SectionOne page={page} />
         </div>
       </div>
@@ -43,7 +43,7 @@ const LandingPage = ({ page }: { page: any }) => {
       </div>
       <div className="bg-black md:py-20">
         <div className="max-w-7xl md:px-10 w-full flex flex-col justify-center items-center mx-auto">
-          <SectionFive />
+          <SectionFive page={page} />
         </div>
       </div>
       <div className=" bg-dark  md:py-20">

@@ -22,7 +22,10 @@ function Countdown({ duration = 5 * 3600 + 22 * 60 + 42 }) {
   )
 }
 
-export default function SectionFive() {
+export default function SectionFive({ page }: any) {
+  const price = page?.pricing[0] || 0
+  // console.log(price)
+
   const items = [
     { title: 'মাস্টার লাভার কোর্স', old: '৳৫,০০০', new: '৳৩,০০০', icon: '🎓' },
     { title: 'দ্য আর্ট অফ ফোরপ্লে – ইবুক', old: '৳৩৮০', new: 'ফ্রি', icon: '📘' },
@@ -78,13 +81,15 @@ export default function SectionFive() {
 
         {/* Total Value */}
         <p className="text-center line-through text-gray-400 text-sm md:text-lg">
-          সর্বমোট ভ্যালু: ৯,৬৬০ টাকা
+          সর্বমোট ভ্যালু: {price?.discount} টাকা
         </p>
 
         {/* Big Price */}
         <div className="flex justify-center items-end gap-2 md:gap-3 flex-wrap">
           <span className="text-red-600 text-lg md:text-2xl font-bold">মাত্র</span>
-          <span className="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-none">১২৫০</span>
+          <span className="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-none">
+            {price?.price}
+          </span>
           <span className="text-lg md:text-2xl font-semibold">টাকা</span>
         </div>
 

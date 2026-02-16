@@ -58,7 +58,7 @@ export default function SectionOne({ page }: { page: any }) {
             </div>
 
             <ul className="space-y-4 md:space-y-6 text-sm sm:text-base md:text-lg text-gray-800 leading-relaxed">
-              <li>✅ ‘১০ সেকেন্ড অর্গাজম’ ফর্মুলা</li>
+              <li>✅ কেগেল Exercise এর মাধ্যমে নিজের টাইমিং বাড়ানো</li>
               <li>✅ স্ত্রীকে পাগল করার ‘ফোর-প্লে’ টেকনিক</li>
               <li>✅ নন-স্টপ টাইমিং কন্ট্রোলের ক্ষমতা</li>
               <li>✅ ওরাল প্লেজার সম্পর্কিত সচেতনতা ও দক্ষতা</li>
