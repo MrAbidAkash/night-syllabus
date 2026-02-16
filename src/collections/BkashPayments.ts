@@ -53,6 +53,11 @@ const BkashPayments: CollectionConfig = {
       name: 'customerInfo',
       type: 'json',
     },
+    {
+      name: 'hasEmail',
+      type: 'checkbox',
+      defaultValue: false,
+    },
   ],
 }
 

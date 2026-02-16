@@ -2,6 +2,7 @@
 import type { Endpoint } from 'payload'
 import { grantToken } from '../lib/bkash'
 import { getPayload } from '@/lib/payload'
+import { sendCourseEmail } from '@/lib/sendCourseEmail'
 
 const BASE_URL = 'https://tokenized.pay.bka.sh/v1.2.0-beta'
 
@@ -158,7 +159,7 @@ export const bkashCallback: Endpoint = {
       })
 
       const data = await resp.json()
-      console.log('bKash execute response:', data)
+      // console.log('bKash execute response:', data)
 
       // =============================
       // ✅ PAYMENT SUCCESS
@@ -177,6 +178,14 @@ export const bkashCallback: Endpoint = {
             user: data.customerMsisdn || '',
           },
         })
+
+        // ✅ SEND EMAIL
+        if (data.customerEmail) {
+          await sendCourseEmail({
+            to: data.customerEmail,
+            paymentID,
+          })
+        }
 
         return Response.redirect(
           `${process.env.NEXT_PUBLIC_FRONTEND_URL}/payment-success?paymentID=${paymentID}`,
