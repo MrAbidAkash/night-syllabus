@@ -29,15 +29,15 @@ const faqs = [
 export default function SectionSix() {
   const [open, setOpen] = useState(0)
 
-    const handleBuyNow = () => {
-      const el = document.getElementById('checkout')
-      if (el) {
-        el.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        })
-      }
+  const handleBuyNow = () => {
+    const el = document.getElementById('checkout')
+    if (el) {
+      el.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
     }
+  }
 
   return (
     <section className=" md:bg-black text-white py-16 px-4">
@@ -74,7 +74,8 @@ export default function SectionSix() {
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
           <a
-            href="https://wa.me/8801798979578"
+            target="_blank"
+            href="https://wa.me/8801558291907"
             className="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 px-8 py-4 rounded-full font-bold transition-transform hover:scale-105"
           >
             💬 যোগাযোগ করুন

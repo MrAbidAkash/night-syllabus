@@ -81,7 +81,7 @@ const LandingPage = ({ page }: { page: any }) => {
       <div>
         {' '}
         <a
-          href="https://wa.me/+8801558291907?text=Hello!%20I%20want%20to%20know%20more."
+          href="https://wa.me/8801558291907"
           target="_blank"
           aria-label="Chat on WhatsApp"
           className="
