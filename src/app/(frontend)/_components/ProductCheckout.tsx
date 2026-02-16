@@ -136,7 +136,7 @@ export default function ProductCheckout({ page }: { page: any }) {
 
     // 2. TikTok Pixel (browser)
     if (typeof window !== 'undefined' && (window as any).ttq) {
-      ;;(window as any).ttq.track('InitiateCheckout', {
+      ;(window as any).ttq.track('InitiateCheckout', {
         content_id: variant.id || variant.pricingId,
         content_type: 'product',
         currency: 'BDT',
@@ -279,7 +279,7 @@ export default function ProductCheckout({ page }: { page: any }) {
   }
 
   const isFormValid =
-    customerInfo.name && customerInfo.address && /^01\d{9}$/.test(customerInfo.phone)
+    customerInfo.name /* && customerInfo.address  */ && /^01\d{9}$/.test(customerInfo.phone)
 
   // Rest of your JSX remains the same...
   return (

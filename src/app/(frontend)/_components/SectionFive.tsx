@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
+import CountDownTimer from './CountDownTimer'
 
 function Countdown({ duration = 5 * 3600 + 22 * 60 + 42 }) {
   const [time, setTime] = useState(duration)
@@ -52,7 +53,7 @@ export default function SectionFive({ page }: any) {
             ⏱ <span>অফার শেষ হতে বাকি:</span>
           </div>
           <div className="flex justify-center sm:justify-end">
-            <Countdown />
+            <CountDownTimer />
           </div>
         </div>
 
