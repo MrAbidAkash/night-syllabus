@@ -17,7 +17,7 @@ const LandingPage = ({ page }: { page: any }) => {
       <div className="hero-g ">
         <Header />
 
-        <div className="max-w-7xl px-6 w-full flex flex-col justify-center items-center mx-auto">
+        <div className="max-w-7xl md:px-6 w-full flex flex-col justify-center items-center mx-auto">
           <HeroSection page={page} />
         </div>
       </div>

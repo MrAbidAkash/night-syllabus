@@ -47,13 +47,14 @@ export default function LearnerReviews() {
             slidesPerView={1} // default = mobile
             spaceBetween={16}
             breakpoints={{
+              0: { slidesPerView: 3 },
               768: { slidesPerView: 2 },
               1280: { slidesPerView: 4 },
             }}
           >
             {images.map((src, i) => (
               <SwiperSlide key={i}>
-                <div className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                <div className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300 max-md:px-5">
                   <div className="aspect-[4/5]">
                     <img
                       src={src}
