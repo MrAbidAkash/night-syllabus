@@ -41,25 +41,31 @@ export default function SectionFive() {
   }
 
   return (
-    <section className="bg-transparent border border-primary text-white py-16 px-6 min-w-2xl">
-      <div className="max-w-5xl mx-auto space-y-10 text-2xl font-bold">
+    <section className="bg-transparent md:border border-primary text-white py-10 md:py-16 px-4 w-full">
+      <div className="md:max-w-5xl mx-auto space-y-8 md:space-y-10 text-base sm:text-lg md:text-xl font-bold">
         {/* Countdown */}
-        <div className="flex justify-between items-center gap-10 px-3">
-          <div className="flex items-center gap-2 font-semibold">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-6 px-2 text-center sm:text-left max-sm:text-xl">
+          <div className="flex items-center justify-center sm:justify-start gap-2 font-semibold">
             ⏱ <span>অফার শেষ হতে বাকি:</span>
           </div>
-          <Countdown />
+          <div className="flex justify-center sm:justify-end">
+            <Countdown />
+          </div>
         </div>
 
         {/* Offer Items */}
-        <div className="space-y-5">
+        <div className="space-y-4 md:space-y-5">
           {items.map((item, i) => (
-            <div key={i} className="flex items-center justify-between bg-gray-900 rounded-xl p-5">
-              <div className="flex items-center gap-4">
-                <span className="text-3xl">{item.icon}</span>
-                <h3 className="font-semibold text-lg">{item.title}</h3>
+            <div
+              key={i}
+              className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-gray-900 rounded-xl p-4 md:p-5"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-2xl md:text-3xl">{item.icon}</span>
+                <h3 className="font-semibold text-sm sm:text-base md:text-lg">{item.title}</h3>
               </div>
-              <p className="text-right">
+
+              <p className="text-left sm:text-right text-sm sm:text-base">
                 <span className="line-through text-gray-400 mr-2">{item.old}</span>
                 <span className="text-red-500 font-bold">{item.new}</span>
               </p>
@@ -71,20 +77,22 @@ export default function SectionFive() {
         <div className="h-px bg-gray-700" />
 
         {/* Total Value */}
-        <p className="text-center line-through text-gray-400 text-lg">সর্বমোট ভ্যালু: ৯,৬৬০ টাকা</p>
+        <p className="text-center line-through text-gray-400 text-sm md:text-lg">
+          সর্বমোট ভ্যালু: ৯,৬৬০ টাকা
+        </p>
 
         {/* Big Price */}
-        <div className="flex justify-center items-end gap-3">
-          <span className="text-red-600 text-2xl font-bold">মাত্র</span>
-          <span className="text-6xl md:text-7xl font-extrabold">১২৫০</span>
-          <span className="text-2xl font-semibold">টাকা</span>
+        <div className="flex justify-center items-end gap-2 md:gap-3 flex-wrap">
+          <span className="text-red-600 text-lg md:text-2xl font-bold">মাত্র</span>
+          <span className="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-none">১২৫০</span>
+          <span className="text-lg md:text-2xl font-semibold">টাকা</span>
         </div>
 
         {/* CTA */}
-        <div className="text-center pt-6">
+        <div className="text-center pt-4 md:pt-6">
           <button
             onClick={handleBuyNow}
-            className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 px-10 py-4 rounded-full text-lg font-bold transition-transform hover:scale-105"
+            className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 px-6 md:px-10 py-3 md:py-4 rounded-full text-base md:text-lg font-bold transition-transform hover:scale-105 w-full sm:w-auto"
           >
             🚀 অফারটি নিতে চাই!
           </button>

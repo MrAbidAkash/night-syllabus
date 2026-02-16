@@ -14,7 +14,7 @@ import WhatsAppCTA from './WhatsAppCTA'
 const LandingPage = ({ page }: { page: any }) => {
   return (
     <div>
-      <div className="hero-g max-sm:pt-30">
+      <div className="hero-g ">
         <Header />
 
         <div className="max-w-7xl px-6 w-full flex flex-col justify-center items-center mx-auto">
@@ -31,23 +31,23 @@ const LandingPage = ({ page }: { page: any }) => {
           <SectionTwo page={page} />
         </div>
       </div>
-      <div className="bg-white border-b border-gray-200  py-10">
-        <div className="max-w-7xl px-10 w-full flex flex-col justify-center items-center mx-auto">
+      <div className="bg-white border-b border-gray-200  md:py-10">
+        <div className="max-w-7xl md:px-10 w-full flex flex-col justify-center items-center mx-auto">
           <SectionThree page={page} />
         </div>
       </div>
       <div className=" bg-white">
-        <div className="max-w-7xl px-10 w-full flex flex-col justify-center items-center mx-auto">
+        <div className="max-w-7xl md:px-10 w-full flex flex-col justify-center items-center mx-auto">
           <SectionFour />
         </div>
       </div>
-      <div className="bg-black py-20">
-        <div className="max-w-7xl px-10 w-full flex flex-col justify-center items-center mx-auto">
+      <div className="bg-black md:py-20">
+        <div className="max-w-7xl md:px-10 w-full flex flex-col justify-center items-center mx-auto">
           <SectionFive />
         </div>
       </div>
-      <div className=" bg-dark  py-20">
-        <div className="max-w-7xl px-10 w-full flex flex-col justify-center items-center mx-auto">
+      <div className=" bg-dark  md:py-20">
+        <div className="max-w-7xl md:px-10 w-full flex flex-col justify-center items-center mx-auto">
           <SectionSix />
         </div>
       </div>

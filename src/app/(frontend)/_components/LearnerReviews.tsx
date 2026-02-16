@@ -24,43 +24,44 @@ export default function LearnerReviews() {
   }
 
   return (
-    <section className="">
-      <div className="max-w-7xl mx-auto text-center space-y-1">
+    <section className="py-1 md:py-20 px-4">
+      <div className="max-w-7xl mx-auto text-center space-y-4 md:space-y-6">
         {/* Headings */}
-        <h2 className="text-3xl md:text-6xl font-bold text-center mx-auto text-black">
-          <span className="text-red-600 w-full items-center justify-center">৪,৫০০+ লার্নার</span> কি
-          বলছে?
+        <h2 className="text-3xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-black leading-tight">
+          <span className="text-red-600">৪,৫০০+ লার্নার</span> কি বলছে?
         </h2>
 
-        <h3 className="text-lg md:text-2xl text-gray-700 text-center">
+        <h3 className="text-sm sm:text-base md:text-2xl text-gray-700">
           আমাদের ইনবক্স ও কমেন্ট থেকে স্যাটিসফাইড লার্নারদের কিছু রিভিউ:
         </h3>
 
         {/* Divider */}
-        <div className="w-24 h-1 bg-red-600 mx-auto rounded" />
+        <div className="w-16 md:w-24 h-1 bg-red-600 mx-auto rounded" />
 
         {/* Carousel */}
-        <div className="mt-10">
+        <div className="mt-8 md:mt-10">
           <Swiper
             modules={[Autoplay]}
             autoplay={{ delay: 2600, disableOnInteraction: false }}
             loop
-            spaceBetween={12}
+            slidesPerView={1} // default = mobile
+            spaceBetween={16}
             breakpoints={{
-              0: { slidesPerView: 1 },
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 4 },
+              768: { slidesPerView: 2 },
+              1280: { slidesPerView: 4 },
             }}
           >
             {images.map((src, i) => (
               <SwiperSlide key={i}>
-                <div className="rounded-xl overflow-hidden shadow hover:shadow-lg transition">
-                  <img
-                    src={src}
-                    alt={`Learner review ${i + 1}`}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
+                <div className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                  <div className="aspect-[4/5]">
+                    <img
+                      src={src}
+                      alt={`Learner review ${i + 1}`}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
                 </div>
               </SwiperSlide>
             ))}
@@ -68,15 +69,15 @@ export default function LearnerReviews() {
         </div>
 
         {/* CTA */}
-        <div className="pt-10 space-y-4">
+        <div className="pt-8 md:pt-10 space-y-3 md:space-y-4">
           <button
             onClick={handleBuyNow}
-            className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-transform hover:scale-105"
+            className="inline-flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-full text-base md:text-lg font-semibold transition-transform hover:scale-105 w-full sm:w-auto"
           >
             🚀 এখনই এনরোল করুন
           </button>
 
-          <h4 className="text-lg font-semibold text-gray-800">
+          <h4 className="text-sm md:text-lg font-semibold text-gray-800">
             ⚠️ এই কোর্সটি শুধুমাত্র প্রাপ্তবয়স্কদের জন্য! ⚠️
           </h4>
         </div>

@@ -38,11 +38,11 @@ export default function SectionThree({ page }: { page: any }) {
   ]
 
   return (
-    <section className="py-16 px-4 bg-gray-50 text-black">
+    <section className="py-16 px-5 bg-gray-50 text-black">
       <div className="max-w-5xl mx-auto space-y-8">
         {/* Headings */}
         <div className="flex justify-center">
-          <h2 className="text-3xl md:text-lg font-bold text-center p-2 px-6 rounded-full border-primary border">
+          <h2 className="text-lg md:text-lg font-bold text-center p-2 px-6 rounded-full border-primary border">
             How This Course Will Transform You?
           </h2>
         </div>

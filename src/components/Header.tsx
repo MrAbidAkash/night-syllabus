@@ -15,7 +15,7 @@ export default function Header() {
   }
   return (
     <div className="border-b border-primary">
-      <header className="flex max-sm:flex-col max-sm:gap-3 items-center justify-between px-6 py-5  -sm  max-w-7xl mx-auto">
+      <header className="flex max-sm:flex-col max-sm:gap-6 items-center justify-between px-6 py-5  -sm  max-w-7xl mx-auto">
         <div
           className="elementor-element elementor-element-46825f1 elementor-widget elementor-widget-theme-site-logo elementor-widget-image"
           data-id="46825f1"
@@ -27,9 +27,8 @@ export default function Header() {
             <div
               role="img"
               aria-label="Site Logo"
+              className="md:w-[128px] md:h-[47px] w-[180px] h-[70px]"
               style={{
-                width: 128,
-                height: 47,
                 backgroundImage:
                   'url(https://nightsyllabus.com/wp-content/uploads/2026/01/Site-Logo.png)',
                 backgroundSize: 'contain',
@@ -40,7 +39,7 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="flex">
+        <div className="hidden md:flex ">
           <div className="flex gap-7">
             <div className="e-n-menu-item">
               <div

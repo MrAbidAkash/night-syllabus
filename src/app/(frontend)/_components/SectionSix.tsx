@@ -40,7 +40,7 @@ export default function SectionSix() {
     }
 
   return (
-    <section className="bg-black text-white py-16 px-4">
+    <section className=" md:bg-black text-white py-16 px-4">
       <div className="max-w-4xl mx-auto space-y-10">
         {/* Heading */}
         <div className="text-center space-y-3">
