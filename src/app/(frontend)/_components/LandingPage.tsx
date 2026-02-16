@@ -65,7 +65,7 @@ const LandingPage = ({ page }: { page: any }) => {
       <div className="bg-white text-black py-5 pt-10">
         <div className="max-w-7xl w-full flex flex-col justify-center items-center mx-auto">
           {/* <ParcelInfo /> */}
-          <div id="checkout" className="sm:px-5 px-2 pb-20 flex flex-col gap-20">
+          <div id="checkout" className="sm:px-5 px-2 pb-10 flex flex-col gap-20">
             <ProductCheckout page={page} /> <WhatsAppCTA />{' '}
           </div>
         </div>
