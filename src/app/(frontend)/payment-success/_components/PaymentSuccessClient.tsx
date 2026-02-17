@@ -8,6 +8,7 @@ export default function PaymentSuccess() {
   const searchParams = useSearchParams()
   const paymentID = searchParams.get('paymentID')
   const [paymentData, setPaymentData] = useState<any>(null)
+  console.log('paymentData', paymentData)
   const status = paymentData?.transactionStatus
   const trxID = paymentData?.trxID
 

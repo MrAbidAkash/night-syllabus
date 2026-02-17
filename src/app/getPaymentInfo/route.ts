@@ -37,7 +37,7 @@ export async function GET(req: Request) {
   // ✅ Match pricing by pricingId
   // const matchedPricing = order.product?.pricing?.find((p: any) => p.pricingId === order.pricingId)
   const matchedPricing = {
-    label: 'যৌ*ন স্বাস্থ্য সমস্যা ও সমাধানের Complete Guideline × 1',
+    label: 'How to Satisfy a Woman in Bed – Course',
   }
 
   console.log('matchedPricing', matchedPricing)
