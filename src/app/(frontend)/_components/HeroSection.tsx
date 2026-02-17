@@ -38,7 +38,8 @@ export default function HeroSection({ page }: { page: any }) {
             ৯০% পুরুষ জানেই না, কিভাবে নারীর শরীরকে উত্তেজিত করতে হয়!
             <br />
             <span className="text-red-600">
-              কিন্তু একজন &apos;মাস্টার লাভার&apos; জানে কীভাবে নারীর শরীরের প্রতিটি ইঞ্চিতে শিহরণ জাগাতে হয়!
+              কিন্তু একজন &apos;মাস্টার লাভার&apos; জানে কীভাবে নারীর শরীরের প্রতিটি ইঞ্চিতে শিহরণ
+              জাগাতে হয়!
             </span>
           </p>
         </div>
@@ -48,7 +49,7 @@ export default function HeroSection({ page }: { page: any }) {
           <div className="w-full">
             <iframe
               className="w-full aspect-video rounded-md"
-              src="https://www.youtube.com/embed/abzpfDXtXPE"
+              src="https://www.youtube.com/embed/KYYuP9FsCFI?si=SqEe7XEKxblWI5A5"
               title="YouTube video player"
               allowFullScreen
             />

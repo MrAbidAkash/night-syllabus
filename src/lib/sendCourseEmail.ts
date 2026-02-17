@@ -59,8 +59,8 @@ export async function sendCourseEmail({ to, paymentID }: { to: string; paymentID
       .join('')
 
   const html = `
-    <h2>🎉 Payment Successful!</h2>
-    <p>Your payment ID: <b>${paymentID}</b></p>
+    <h2>🎉 Purchase Successful!</h2>
+    <p>Your Purchase ID: <b>${paymentID}</b></p>
 
     <p>Here are your resources:</p>
 
@@ -78,7 +78,8 @@ export async function sendCourseEmail({ to, paymentID }: { to: string; paymentID
   await transporter.sendMail({
     from: `"Healthy Intimate Life" <${process.env.SMTP_USER}>`,
     to,
-    subject: 'Your Course Access – Payment Successful',
+    subject: 'Your Course Access – Purchase Successful',
+
     html,
   })
 }
