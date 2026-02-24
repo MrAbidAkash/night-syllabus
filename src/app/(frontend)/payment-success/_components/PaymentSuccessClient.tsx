@@ -8,7 +8,8 @@ export default function PaymentSuccess() {
   const searchParams = useSearchParams()
   const paymentID = searchParams.get('paymentID')
   const [paymentData, setPaymentData] = useState<any>(null)
-  console.log('paymentData', paymentData)
+  // console.log('paymentData', paymentData)
+  const [loading, setLoading] = useState(true)
   const status = paymentData?.transactionStatus
   const trxID = paymentData?.trxID
 
@@ -19,8 +20,11 @@ export default function PaymentSuccess() {
         const payment = await fetch(`/getPaymentInfo?paymentID=${paymentID}`)
         const paymentData = await payment.json()
         setPaymentData(paymentData)
+        setLoading(false)
       } catch (error) {
         console.log(error)
+      } finally {
+        setLoading(false)
       }
     })()
   }, [paymentID])
@@ -29,122 +33,133 @@ export default function PaymentSuccess() {
     paymentData?.transactionStatus === 'Completed' && paymentData?.payerReference === 'partial'
   const purchased =
     paymentData?.transactionStatus === 'Completed' && paymentData?.payerReference === 'fullPrice'
-  const hasSentPurchaseEvent = useRef(false)
+  // const hasSentPurchaseEvent = useRef(false)
 
-  // Send Purchase events to both platforms
-  const sendPurchaseEvents = async () => {
-    if (!paymentData) return
+  // // Send Purchase events to both platforms
+  // const sendPurchaseEvents = async () => {
+  //   if (!paymentData) return
 
-    const orderId = `purchase_${paymentID}_${trxID}`
-    const purchaseType = booked ? 'partial' : purchased ? 'full' : 'standard'
+  //   const orderId = `purchase_${paymentID}_${trxID}`
+  //   const purchaseType = booked ? 'partial' : purchased ? 'full' : 'standard'
 
-    // Product contents for both platforms
-    const contents = [
-      {
-        content_type: 'product',
-        content_id: paymentData.id || paymentData.pricingId,
-        content_name: paymentData.productInfo?.label,
-        price: paymentData.productInfo?.price,
-        quantity: 1,
-      },
-    ]
+  //   // Product contents for both platforms
+  //   const contents = [
+  //     {
+  //       content_type: 'product',
+  //       content_id: paymentData.id || paymentData.pricingId,
+  //       content_name: paymentData.productInfo?.label,
+  //       price: paymentData.productInfo?.price,
+  //       quantity: 1,
+  //     },
+  //   ]
 
-    // 1. Facebook Pixel (browser)
-    // if (typeof window !== 'undefined' && window.fbq) {
-    //   window.fbq('track', 'Purchase', {
-    //     value: paymentData?.amount,
-    //     currency: 'BDT',
-    //     content_ids: [paymentData.id || paymentData.pricingId],
-    //     content_type: 'product',
-    //     purchase_type: purchaseType,
-    //     eventID: orderId,
-    //   })
-    // }
+  //   // 1. Facebook Pixel (browser)
+  //   // if (typeof window !== 'undefined' && window.fbq) {
+  //   //   window.fbq('track', 'Purchase', {
+  //   //     value: paymentData?.amount,
+  //   //     currency: 'BDT',
+  //   //     content_ids: [paymentData.id || paymentData.pricingId],
+  //   //     content_type: 'product',
+  //   //     purchase_type: purchaseType,
+  //   //     eventID: orderId,
+  //   //   })
+  //   // }
 
-    // 2. TikTok Pixel (browser)
-    if (typeof window !== 'undefined' && (window as any).ttq) {
-      ;(window as any).ttq.track('PlaceAnOrder', {
-        value: paymentData?.amount,
-        currency: 'BDT',
-        contents: contents,
-      })
-    }
+  //   // 2. TikTok Pixel (browser)
+  //   if (typeof window !== 'undefined' && (window as any).ttq) {
+  //     ;(window as any).ttq.track('PlaceAnOrder', {
+  //       value: paymentData?.amount,
+  //       currency: 'BDT',
+  //       contents: contents,
+  //     })
+  //   }
 
-    // 3. Facebook Server Event
-    const facebookEventData = {
-      platform: 'facebook',
-      event_name: 'Purchase',
-      event_id: orderId,
-      customer_info: {
-        name: paymentData?.customerInfo.name,
-        phone: paymentData?.customerInfo.phone,
-        address: paymentData?.customerInfo.address,
-        email: paymentData?.customerInfo.email,
-      },
-      currency: 'BDT',
-      value: paymentData?.amount,
-      custom_data: {
-        purchase_type: purchaseType,
-        content_ids: [paymentData.id || paymentData.pricingId],
-        content_type: 'product',
-        product_name: paymentData?.productInfo?.label,
-        size: paymentData?.size,
-        productPrice: paymentData?.productInfo?.price,
-      },
-    }
+  //   // 3. Facebook Server Event
+  //   const facebookEventData = {
+  //     platform: 'facebook',
+  //     event_name: 'Purchase',
+  //     event_id: orderId,
+  //     customer_info: {
+  //       name: paymentData?.customerInfo.name,
+  //       phone: paymentData?.customerInfo.phone,
+  //       address: paymentData?.customerInfo.address,
+  //       email: paymentData?.customerInfo.email,
+  //     },
+  //     currency: 'BDT',
+  //     value: paymentData?.amount,
+  //     custom_data: {
+  //       purchase_type: purchaseType,
+  //       content_ids: [paymentData.id || paymentData.pricingId],
+  //       content_type: 'product',
+  //       product_name: paymentData?.productInfo?.label,
+  //       size: paymentData?.size,
+  //       productPrice: paymentData?.productInfo?.price,
+  //     },
+  //   }
 
-    // 4. TikTok Server Event
-    const tiktokEventData = {
-      platform: 'tiktok',
-      event_name: 'PlaceAnOrder', // TikTok uses 'PlaceAnOrder' for purchase
-      event_id: orderId,
-      value: paymentData?.amount,
-      currency: 'BDT',
-      contents: contents,
-      customer: {
-        name: paymentData?.customerInfo.name,
-        email: paymentData?.customerInfo.email,
-        phone: paymentData?.customerInfo.phone,
-        address: paymentData?.customerInfo.address,
-      },
-      extra: {
-        purchase_type: purchaseType,
-        productPrice: paymentData?.productInfo?.price,
-        size: paymentData?.size,
-      },
-    }
+  //   // 4. TikTok Server Event
+  //   const tiktokEventData = {
+  //     platform: 'tiktok',
+  //     event_name: 'PlaceAnOrder', // TikTok uses 'PlaceAnOrder' for purchase
+  //     event_id: orderId,
+  //     value: paymentData?.amount,
+  //     currency: 'BDT',
+  //     contents: contents,
+  //     customer: {
+  //       name: paymentData?.customerInfo.name,
+  //       email: paymentData?.customerInfo.email,
+  //       phone: paymentData?.customerInfo.phone,
+  //       address: paymentData?.customerInfo.address,
+  //     },
+  //     extra: {
+  //       purchase_type: purchaseType,
+  //       productPrice: paymentData?.productInfo?.price,
+  //       size: paymentData?.size,
+  //     },
+  //   }
 
-    // Send both events
-    try {
-      await Promise.all([
-        fetch('/fb-conversion', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(facebookEventData),
-        }),
-        fetch('/fb-conversion', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(tiktokEventData),
-        }),
-      ])
-      console.log('Purchase events sent to both platforms')
-    } catch (error) {
-      console.error('Error sending purchase events:', error)
-    }
+  //   // Send both events
+  //   try {
+  //     await Promise.all([
+  //       fetch('/fb-conversion', {
+  //         method: 'POST',
+  //         headers: { 'Content-Type': 'application/json' },
+  //         body: JSON.stringify(facebookEventData),
+  //       }),
+  //       fetch('/fb-conversion', {
+  //         method: 'POST',
+  //         headers: { 'Content-Type': 'application/json' },
+  //         body: JSON.stringify(tiktokEventData),
+  //       }),
+  //     ])
+  //     console.log('Purchase events sent to both platforms')
+  //   } catch (error) {
+  //     console.error('Error sending purchase events:', error)
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   if (!paymentID || !paymentData) return
+  //   if (paymentData.transactionStatus !== 'Completed') return
+  //   if (!paymentData.trxID) return
+
+  //   if ((purchased || booked) && !hasSentPurchaseEvent.current) {
+  //     sendPurchaseEvents()
+  //     hasSentPurchaseEvent.current = true
+  //   }
+  // }, [paymentID, paymentData, purchased, booked])
+
+  if (loading) {
+    return (
+      <div className="min-h-[50vh] flex items-center justify-center bg-gray-100">
+        <div className="flex space-x-2">
+          <div className="w-3 h-3 bg-black rounded-full animate-bounce"></div>
+          <div className="w-3 h-3 bg-black rounded-full animate-bounce delay-150"></div>
+          <div className="w-3 h-3 bg-black rounded-full animate-bounce delay-300"></div>
+        </div>
+      </div>
+    )
   }
-
-  useEffect(() => {
-    if (!paymentID || !paymentData) return
-    if (paymentData.transactionStatus !== 'Completed') return
-    if (!paymentData.trxID) return
-
-    if ((purchased || booked) && !hasSentPurchaseEvent.current) {
-      sendPurchaseEvents()
-      hasSentPurchaseEvent.current = true
-    }
-  }, [paymentID, paymentData, purchased, booked])
-
   if (
     !paymentID ||
     !paymentData ||
@@ -232,7 +247,10 @@ export default function PaymentSuccess() {
         <h2 className=" font-bold text-center p-2 px-6 rounded-full border-primary border mt-3">
           We have sent you an email with the download link
           <br />
-          Please check your email : <a className="text-blue-500" href="https://mail.google.com/">{customer?.email}</a>
+          Please check your email :{' '}
+          <a className="text-blue-500" href="https://mail.google.com/">
+            {customer?.email}
+          </a>
         </h2>
 
         {/* Content */}

@@ -197,6 +197,89 @@ export const bkashCallback: Endpoint = {
           })
         }
 
+        // AFTER payload.update(...)
+        // AFTER sendCourseEmail(...)
+
+        const paymentRecord = await payload.find({
+          collection: 'bkash-payments',
+          where: { paymentID: { equals: paymentID } },
+        })
+
+        const paymentDoc: any = paymentRecord.docs?.[0]
+        console.log('eee', paymentDoc)
+        if (!paymentDoc) throw new Error('Payment not found')
+
+        const orderId = `purchase_${paymentID}_${data.trxID}`
+
+        const purchaseType = paymentDoc.payerReference === 'partial' ? 'partial' : 'full'
+
+        const contents = [
+          {
+            content_type: 'product',
+            content_id: paymentDoc.id || paymentDoc.pricingId,
+            content_name: paymentDoc.productInfo?.label,
+            price: paymentDoc.productInfo?.price / 2 || paymentDoc.amount / 2,
+            quantity: 1,
+          },
+        ]
+
+        const facebookEventData = {
+          platform: 'facebook',
+          event_name: 'Purchase',
+          event_id: orderId,
+          customer_info: {
+            name: paymentDoc.customerInfo?.name,
+            phone: paymentDoc.customerInfo?.phone,
+            address: paymentDoc.customerInfo?.address,
+            email: paymentDoc.customerInfo?.email,
+          },
+          currency: 'BDT',
+          value: paymentDoc.amount / 2,
+          custom_data: {
+            purchase_type: purchaseType,
+            content_ids: [paymentDoc.id || paymentDoc.pricingId],
+            content_type: 'product',
+            product_name: paymentDoc.productInfo?.label,
+            productPrice: paymentDoc.productInfo?.price / 2 || paymentDoc.amount / 2,
+          },
+        }
+
+        const tiktokEventData = {
+          platform: 'tiktok',
+          event_name: 'PlaceAnOrder',
+          event_id: orderId,
+          value: paymentDoc.amount,
+          currency: 'BDT',
+          contents,
+          customer: {
+            name: paymentDoc.customerInfo?.name,
+            email: paymentDoc.customerInfo?.email,
+            phone: paymentDoc.customerInfo?.phone,
+            address: paymentDoc.customerInfo?.address,
+          },
+          extra: {
+            purchase_type: purchaseType,
+            productPrice: paymentDoc.productInfo?.price,
+            size: paymentDoc.size,
+          },
+        }
+
+        // 🔥 Call your existing endpoint (same format)
+        await Promise.all([
+          fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/fb-conversion`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(facebookEventData),
+          }),
+          fetch(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/fb-conversion`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(tiktokEventData),
+          }),
+        ])
+
+        console.log('Purchase events sent from backend')
+
         return Response.redirect(
           `${process.env.NEXT_PUBLIC_FRONTEND_URL}/payment-success?paymentID=${paymentID}`,
         )

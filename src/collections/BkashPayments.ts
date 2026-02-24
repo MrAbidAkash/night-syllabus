@@ -58,6 +58,11 @@ const BkashPayments: CollectionConfig = {
       type: 'checkbox',
       defaultValue: false,
     },
+    {
+      name: 'conversionSent',
+      type: 'checkbox',
+      defaultValue: false,
+    },
   ],
 }
 
